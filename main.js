@@ -11,7 +11,7 @@ Message Pool Categories:
     Health and Wellness
 */
 
-const messageCategories = {
+const lifeAdvices = {
     motivation: [
         "Believe in yourself, and you're halfway there.",
         "The only limit is the one you impose on yourself.",
@@ -28,9 +28,9 @@ const messageCategories = {
        "Choose your friends wisely."
     ],
     personalGrowth: [
-        "Communication is the key to any relationship.",
-        "Love deeply and unconditionally.",
-        "Choose your friends wisely."
+        "Step outside your comfort zone. That's where the magic happens.",
+        "Never stop learning.",
+        "Embrace change as an opportunity for growth."
     ],
     overcomingChallenges: [
         "Every challenge is an opportunity to grow stronger.",
@@ -54,13 +54,33 @@ const messageCategories = {
     ]
 };
 
-function createMessageArray(poolMessage) {
+function createMessageArray(pool) {
     const allMessages = [];
-    for (const category in poolMessage) {
-      allMessages.push(...poolMessage[category]);
+    for (const category in pool) {
+      allMessages.push(...pool[category]);
     }
     return allMessages;
 }
   
-const allLifeAdvices = createMessageArray(messageCategories);
-console.log(allLifeAdvices);
+const allLifeAdvices = createMessageArray(lifeAdvices);
+//console.log(allLifeAdvices);
+
+function todaysLifeAdvice(poolObject = lifeAdvices) {
+    // Get all categories
+    const categories = Object.keys(poolObject);
+
+    // Randomly select a category
+    const randomCategory = categories[Math.floor(Math.random() * categories.length)];
+
+  // Randomly select an advice from the chosen category
+  const randomAdviceIndex = Math.floor(Math.random() * poolObject[randomCategory].length);
+  const randomAdvice = poolObject[randomCategory][randomAdviceIndex];
+
+  return {
+    category: randomCategory,
+    advice: randomAdvice
+  }; 
+}
+
+const todaysAdvice = todaysLifeAdvice();
+console.log(todaysAdvice.category, todaysAdvice.advice);
